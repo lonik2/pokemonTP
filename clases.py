@@ -1,5 +1,5 @@
 class HashMap:
-    def __init__(self, tamaño=100):
+    def __init__(self, tamaño=15):
         self.tamaño = tamaño
         self.buckets = [[] for _ in range(tamaño)]
 
@@ -7,8 +7,7 @@ class HashMap:
         suma_num = sum(int(char) for char in key if char.isdigit())
         return suma_num % 10
 
-    def put(self, key, value):
-        # Add or update a key-value pair
+    def agregar(self, key, value):
         indice = self.hash_funcion(key)
         bucket = self.buckets[indice]
         for i, (k, v) in enumerate(bucket):
@@ -17,8 +16,7 @@ class HashMap:
                 return
         bucket.append((key, value))
 
-    def get(self, key):
-        # Retrieve a value by key
+    def buscar(self, key):
         indice = self.hash_funcion(key)
         bucket = self.buckets[indice]
         for k, v in bucket:
@@ -26,7 +24,7 @@ class HashMap:
                 return v
         return None
 
-    def remove(self, key):
+    def borrar(self, key):
         indice = self.hash_funcion(key)
         bucket = self.buckets[indice]
         for i, (k, v) in enumerate(bucket):
@@ -34,7 +32,6 @@ class HashMap:
                 del bucket[i]
                 return
 
-    def print_map(self):
-        print("Hash Map Contents:")
+    def mapa(self):
         for indice, bucket in enumerate(self.buckets):
             print(f"Bucket {indice}: {bucket}")
