@@ -1,0 +1,19 @@
+[
+    {"id": 595, "nombre": "Joltik", "tipo": "Bicho-Electrico", "poder_combate": 319},
+    {"id": 959, "nombre": "Tinkaton", "tipo": "Hada-Acero", "poder_combate": 506},
+    {"id": 937, "nombre": "Ceruledge", "tipo": "Fuego-Fantasma", "poder_combate": 525},
+    {"id": 936, "nombre": "Armarouge", "tipo": "Fuego-Psiquico", "poder_combate": 525},
+    {"id": 475, "nombre": "Gallade", "tipo": "Psiquico-Lucha", "poder_combate": 518},
+    {"id": 248, "nombre": "Tyranitar", "tipo": "Roca-Siniestro", "poder_combate": 600},
+    {"id": 560, "nombre": "Scrafty", "tipo": "Siniestro-Lucha", "poder_combate": 488},
+    {"id": 553, "nombre": "Krookodile", "tipo": "Tierra-Siniestro", "poder_combate": 519},
+    {"id": 625, "nombre": "Bisharp", "tipo": "Siniestro-Acero", "poder_combate": 490},
+    {"id": 637, "nombre": "Volcarona", "tipo": "Bicho-Fuego", "poder_combate": 550},
+    {"id": 802, "nombre": "Marshadow", "tipo": "Lucha-Fantasma", "poder_combate": 600},
+    {"id": 812, "nombre": "Rillaboom", "tipo": "Planta", "poder_combate": 530},
+    {"id": 823, "nombre": "Corviknight", "tipo": "Volador-Acero", "poder_combate": 495},
+    {"id": 887, "nombre": "Dragapult", "tipo": "Dragon-Fantasma", "poder_combate": 600},
+    {"id": 892, "nombre": "Urshifu", "tipo": "Lucha-Agua", "poder_combate": 550},
+    {"id": 849, "nombre": "Toxtricity", "tipo": "Electrico-Veneno", "poder_combate": 502},
+    {"id": 94, "nombre": "Gengar", "tipo": "Fantasma-Veneno", "poder_combate": 500}
+]

@@ -1,3 +1,4 @@
+import json
 from clases import HashMap
 
 
@@ -8,3 +9,7 @@ class Pokemon:
         self.tipo = tipo
         self.poder_combate = poder_combate
 
+
+Pokedex = HashMap()
+
+Pokedex.agregar ()
