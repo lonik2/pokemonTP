@@ -1,7 +1,3 @@
-La Pokédex Nacional: Implementar un Hash Map que funcione como la base de datos global del juego. La clave será el id numérico y el valor será la instancia del objeto Pokemon. 
-    Se deben precargar al menos 15 Pokémon distintos que se obtiene a partir de un archivo json.
-
-
 Registro de Medallas: Utilizar un Hash Set para almacenar los nombres de las medallas de gimnasio obtenidas por el entrenador. El sistema debe demostrar que la estructura previene 
     la duplicación de medallas (por ejemplo, intentar añadir la "Medalla Roca" dos veces). Se deben precargar al menos dos medallas desde un archivo json que contiene el total.
 
