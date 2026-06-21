@@ -1,0 +1,10 @@
+[
+    {"nombre": "medalla roca", "entrenador": "Brock"},
+    {"nombre": "medalla agua", "entrenador": "Misty"},
+    {"nombre": "medalla trueno", "entrenador": "Lt. Surge"},
+    {"nombre": "medalla planta", "entrenador": "Erika"},
+    {"nombre": "medalla veneno", "entrenador": "Koga"},
+    {"nombre": "medalla psiquico", "entrenador": "Sabrina"},
+    {"nombre": "medalla fuego", "entrenador": "Blaine"},
+    {"nombre": "medalla tierra", "entrenador": "Giovanni"}
+]

@@ -1,5 +1,6 @@
 import json
-from clases import HashMap
+import random
+from clases import HashMap, HashSet
 
 
 class Pokemon:
@@ -11,6 +12,8 @@ class Pokemon:
     
     def __repr__(self):
         return f"{self.nombre} ({self.tipo}) ({self.poder_combate})"
+
+
 
 
 Pokedex = HashMap()
@@ -26,6 +29,19 @@ try:
 except FileNotFoundError:
     print ("no se encontro el json con los datos")
 
+Registro_medallas = HashSet()
+ 
+try:
+    with open("medallas.json", "r", encoding="utf-8") as medallas:
+        lista_medallas = json.load(medallas)
+ 
+        for m in lista_medallas[:2]:
+            Registro_medallas.agregar(m["nombre"])
+except FileNotFoundError:
+    print("no se encontro el json con las medallas")
 
 print ("-----POKEDEX NACIONAL-----")
 Pokedex.mapa()
+print()
+print ("-----REGISTRO DE MEDALLAS-----")
+Registro_medallas.mostrar_set()

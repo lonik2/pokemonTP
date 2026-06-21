@@ -43,8 +43,37 @@ class HashMap:
             intentos += 1
 
     def mapa(self):
-        contador = 0
         for indice, bucket in enumerate(self.buckets):
-            contador+= 1
-            print(contador, bucket)
+            print(f"{indice+1}: {bucket}")
+
+class HashSet:
+    def __init__(self, tamaño=8):
+        self.tamaño = tamaño
+        self.buckets = [[] for _ in range(tamaño)]
+      
+    def hash_funcion(self, value):
+        return sum(ord(char) for char in value) % self.tamaño
+
+    def agregar(self, value):
+        indice = self.hash_funcion(value)
+        bucket = self.buckets[indice]
+        if value not in bucket:
+            bucket.append(value)
+            return True
+        return False
+
+    def contiene(self, value):
+        indice = self.hash_funcion(value)
+        bucket = self.buckets[indice]
+        return value in bucket
+
+    def borrar(self, value):
+        indice = self.hash_funcion(value)
+        bucket = self.buckets[indice]
+        if value in bucket:
+            bucket.remove(value)
+
+    def mostrar_set(self):
+        for indice, bucket in enumerate(self.buckets):
+            print(f"{indice+1}: {bucket}")
 
