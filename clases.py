@@ -106,3 +106,62 @@ class ListaEnlazada:
             print(f"  {contador}. {actual.valor}")
             actual = actual.siguiente
             contador += 1
+    
+    def remover(self, valor):
+        if self.cabeza is None:
+            return
+        if self.cabeza.valor == valor:
+            self.cabeza = self.cabeza.siguiente
+            return
+        actual = self.cabeza
+        while actual.siguiente is not None:
+            if actual.siguiente.valor == valor:
+                actual.siguiente = actual.siguiente.siguiente
+                return
+            actual = actual.siguiente
+
+class Stack:
+    def __init__ (self):
+        self.stack = []
+
+    def push (self, element):
+        self.stack.append(element)
+
+    def isEmpty (self):
+        return len(self.stack) == 0
+
+    def pop (self):
+        if self.isEmpty():
+            return "lista vacia"
+        return self.stack.pop()
+
+    def peek (self):
+        if self.isEmpty():
+            return "lista vacia"
+        return self.stack[-1]
+
+    def tamaño (self):
+        return len(self.stack)
+
+class Queue:
+    def __init__ (self):
+        self.queue = []
+    
+    def push (self, element):
+        self.queue.append(element)
+
+    def isEmpty (self):
+        return len(self.queue) == 0
+
+    def pop (self):
+        if self.isEmpty():
+            return "lista vacia"
+        return self.queue.pop(0)
+
+    def peek (self):
+        if self.isEmpty():
+            return "lista vacia"
+        return self.queue[0]
+
+    def tamaño (self):
+        return len(self.queue)

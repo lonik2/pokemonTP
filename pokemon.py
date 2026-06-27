@@ -1,6 +1,7 @@
 import json
 import random
-from clases import HashMap, HashSet, Nodo, ListaEnlazada
+import time
+from clases import HashMap, HashSet, Nodo, ListaEnlazada, Queue, Stack
 
 
 class Pokemon:
@@ -17,6 +18,8 @@ Pokedex = HashMap()
 Registro_medallas = HashSet()
 equipo = []
 pc = ListaEnlazada()
+centro_pokemon = Queue()
+transferencias = Stack()
 
 try:
     with open("pokemones.json", "r", encoding="utf-8") as pokemones:
@@ -42,6 +45,7 @@ def capturar_pokemon(pokedex, equipo, pc):
     disponibles = [bucket[1] for bucket in pokedex.buckets if bucket is not None]
     pokemon = random.choice(disponibles)
     print(f"Un {pokemon.nombre} salvaje ha aparecido")
+    time.sleep (1)
     print(f"{pokemon.nombre} atrapado exitosamente")
     if len(equipo) < 6:
         equipo.append (pokemon)
@@ -50,6 +54,56 @@ def capturar_pokemon(pokedex, equipo, pc):
         pc.agregar(pokemon)
         print(f"{pokemon} guardado en la pc")
     return pokemon
+
+def curar (equipo, centro_pokemon):
+    for p in equipo:
+        centro_pokemon.push(p)
+        print (f"{p} agregado al centro")
+        time.sleep(1)    
+    while not centro_pokemon.isEmpty():
+        p = centro_pokemon.peek()
+        print (f"curando {p}")
+        time.sleep(1)
+        centro_pokemon.pop()
+        print (f"{p} curado")
+        time.sleep(1)
+
+def transferir_pokemon (pc, transferencias, pokemon):
+    if pc.cabeza is None:
+        print("No hay pokemones en la PC.")
+        return
+
+    disponibles = []
+    actual = pc.cabeza
+    while actual is not None:
+        disponibles.append(actual.valor)
+        actual = actual.siguiente
+
+    print("--- Pokemon en la PC ---")
+    for i, p in enumerate(disponibles, start=1):
+        print(f"  {i}. {p}")
+
+    eleccion = int(input("Elegí el número del pokemon que queres transferir: "))
+    if eleccion < 1 or eleccion > len(disponibles):
+        print("Numero invalido.")
+        return
+
+    pokemon = disponibles[eleccion - 1]
+    pc.remover(pokemon)
+    if transferencias.tamaño() >= 5:
+        transferencias.stack.pop(0)
+    transferencias.push(pokemon)
+    print(f"{pokemon.nombre} fue transferido al profesor Oak.")
+
+
+def deshacer_transferencia(pc, transferencias):
+    if transferencias.isEmpty():
+        print("No hay transferencias para deshacer.")
+        return
+    pokemon = transferencias.pop()
+    pc.agregar(pokemon)
+    print(f"{pokemon.nombre} volvio a la PC.")
+
 
 
 print ("-----POKEDEX NACIONAL-----")
