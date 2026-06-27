@@ -1,3 +1,7 @@
-Registro de Medallas: Utilizar un Hash Set para almacenar los nombres de las medallas de gimnasio obtenidas por el entrenador. El sistema debe demostrar que la estructura previene 
-    la duplicación de medallas (por ejemplo, intentar añadir la "Medalla Roca" dos veces). Se deben precargar al menos dos medallas desde un archivo json que contiene el total.
 
+Se requiere que el usuario pueda ordenar los Pokémon almacenados en su PC. (Un tip: Para este paso, podés hacer una copia temporal de los datos de la Lista Enlazada a una lista 
+de Python estándar para ejecutar el ordenamiento in-place).
+
+Ordenamiento Alfabético: Implementar bubble sort para ordenar los Pokémon por su atributo nombre (A-Z).
+Ordenamiento por Tipo: Implementar selection o insertion sort (el que quieras) para agrupar y ordenar a los Pokémon según su tipo (Fuego, Agua, Planta, etc.).
+Ordenamiento Competitivo: Implementar quick sort para ordenar de manera eficiente los Pokémon según su atributo poder_combate (de mayor a menor).

@@ -16,6 +16,7 @@ class Pokemon:
 
 Pokedex = HashMap()
 Registro_medallas = HashSet()
+lista_lideres = []
 equipo = []
 pc = ListaEnlazada()
 centro_pokemon = Queue()
@@ -34,10 +35,10 @@ except FileNotFoundError:
  
 try:
     with open("medallas.json", "r", encoding="utf-8") as medallas:
-        lista_medallas = json.load(medallas)
+        lista_lideres = json.load(medallas)
  
-        for m in lista_medallas[:2]:
-            Registro_medallas.agregar(m["nombre"])
+        for m in lista_lideres[:2]:
+            Registro_medallas.agregar(m["medalla"])
 except FileNotFoundError:
     print("no se encontro el json con las medallas")
 
@@ -79,7 +80,7 @@ def transferir_pokemon (pc, transferencias, pokemon):
         disponibles.append(actual.valor)
         actual = actual.siguiente
 
-    print("--- Pokemon en la PC ---")
+    print("--- pokemones en la PC ---")
     for i, p in enumerate(disponibles, start=1):
         print(f"  {i}. {p}")
 
@@ -103,6 +104,43 @@ def deshacer_transferencia(pc, transferencias):
     pokemon = transferencias.pop()
     pc.agregar(pokemon)
     print(f"{pokemon.nombre} volvio a la PC.")
+
+def desafiar_lider(lista_lideres, registro_medallas):
+    if not lista_lideres:
+        print("No hay lideres.")
+        return
+ 
+    print("--- lideres de gimnasio ---")
+    for i, lider in enumerate(lista_lideres, start=1):
+        tiene = registro_medallas.contiene(lider["lider"])
+        estado = "[V]" if tiene else "[ ]"
+        print(f"  {i}. {estado} {lider["lider"]} - {lider["medalla"]}")
+ 
+    eleccion = int(input("Elegi el numero del lider que queres desafiar: "))
+    if eleccion < 1 or eleccion > len(lista_lideres):
+        print("numero invalido.")
+        return
+ 
+    lider = lista_lideres[eleccion - 1]
+    print(f"\nPeleando con {lider["lider"]}")
+    time.sleep(2)
+    gano = random.random() < 0.5
+    if gano:
+        print(f"Ganaste contra {lider["lider"]}!")
+        agregada = registro_medallas.agregar(lider["medalla"])
+        if agregada:
+            print(f"Obtuviste la {lider["medalla"]}")
+        else:
+            print(f"Ya tenias la {lider["medalla"]}")
+    else:
+        print(f"Perdiste contra {lider["lider"]}")
+ 
+def ver_registro(lista_lideres, registro_medallas):
+    obtenidas = sum(1 for l in lista_lideres if registro_medallas.contiene(l["medalla"]))
+    print(f"Medallas: {obtenidas}/{len(lista_lideres)}")
+    for lider in lista_lideres:
+        marca = "[X]" if registro_medallas.contiene(lider["medalla"]) else "[ ]"
+        print(f"  {marca} {lider["medalla"]} - {lider["lider"]}")
 
 
 
