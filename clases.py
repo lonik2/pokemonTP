@@ -77,3 +77,32 @@ class HashSet:
         for indice, bucket in enumerate(self.buckets):
             print(f"{indice+1}: {bucket}")
 
+class Nodo:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class ListaEnlazada:
+    def __init__(self):
+        self.cabeza = None
+ 
+    def agregar(self, valor):
+        nuevo_nodo = Nodo(valor)
+        if self.cabeza is None:
+            self.cabeza = nuevo_nodo
+        else:
+            actual = self.cabeza
+            while actual.siguiente is not None:
+                actual = actual.siguiente
+            actual.siguiente = nuevo_nodo
+ 
+    def mostrar(self):
+        if self.cabeza is None:
+            print("La PC esta vacia")
+            return
+        actual = self.cabeza
+        contador = 1
+        while actual is not None:
+            print(f"  {contador}. {actual.valor}")
+            actual = actual.siguiente
+            contador += 1
