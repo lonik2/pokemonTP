@@ -43,7 +43,10 @@ except FileNotFoundError:
     print("no se encontro el json con las medallas")
 
 def capturar_pokemon(pokedex, equipo, pc):
-    disponibles = [bucket[1] for bucket in pokedex.buckets if bucket is not None]
+    disponibles = []
+    for bucket in pokedex.buckets:
+        if bucket is not None:
+            disponibles.append(bucket[1])
     pokemon = random.choice(disponibles)
     print(f"Un {pokemon.nombre} salvaje ha aparecido")
     time.sleep (1)
@@ -76,7 +79,7 @@ def transferir_pokemon (pc, transferencias, pokemon):
     if pc.cabeza is None:
         print("no hay pokemones en la PC")
         return
-
+    
     disponibles = []
     actual = pc.cabeza
     while actual is not None:
@@ -84,9 +87,8 @@ def transferir_pokemon (pc, transferencias, pokemon):
         actual = actual.siguiente
 
     print("--- pokemones en la PC ---")
-    for i, p in enumerate(disponibles, start=1):
-        print(f"  {i}. {p}")
-
+    for i in range(len(disponibles)):
+        print(f"  {i + 1}. {disponibles[i]}")
     eleccion = int(input("Elegí el número del pokemon que queres transferir: "))
     if eleccion < 1 or eleccion > len(disponibles):
         print("numero invalido")
@@ -109,37 +111,36 @@ def deshacer_transferencia(pc, transferencias):
     print(f"{pokemon.nombre} volvio a la PC")
 
 def desafiar_lider(lista_lideres, registro_medallas):
-    if not lista_lideres:
+    if len(lista_lideres) == 0:
         print("No hay lideres.")
         return
- 
     print("--- lideres de gimnasio ---")
-    for i, lider in enumerate(lista_lideres, start=1):
-        tiene = registro_medallas.contiene(lider["lider"])
+    for i in range(len(lista_lideres)):
+        lider = lista_lideres[i]
+        tiene = registro_medallas.contiene(lider["medalla"])
         if tiene:
             estado = "(vencido)"
         else:
             estado = "(por vencer)"
-        print(f"  {i}. {estado} {lider["lider"]} - {lider["medalla"]}")
- 
+        print(f"  {i + 1}. {estado} {lider['lider']} - {lider['medalla']}") 
     eleccion = int(input("Elegi el numero del lider que queres desafiar: "))
     if eleccion < 1 or eleccion > len(lista_lideres):
         print("numero invalido")
         return
- 
     lider = lista_lideres[eleccion - 1]
-    print(f"\nPeleando con {lider["lider"]}")
+    print(f"Peleando con {lider['lider']}")
     time.sleep(2)
     gano = random.random() < 0.5
     if gano:
-        print(f"Ganaste contra {lider["lider"]}!")
+        print(f"Ganaste contra {lider['lider']}")
         agregada = registro_medallas.agregar(lider["medalla"])
         if agregada:
-            print(f"Obtuviste la {lider["medalla"]}")
+            print(f"Obtuviste la {lider['medalla']}")
         else:
-            print(f"Ya tenias la {lider["medalla"]}")
+            print(f"Ya tenias la {lider['medalla']}")
     else:
-        print(f"Perdiste contra {lider["lider"]}")
+        print(f"Perdiste contra {lider['lider']}")
+ 
 
 def ver_equipo():
     if not equipo:
@@ -151,7 +152,10 @@ def ver_equipo():
     time.sleep(2)
  
 def ver_registro(lista_lideres, registro_medallas):
-    obtenidas = sum(1 for l in lista_lideres if registro_medallas.contiene(l["medalla"]))
+    obtenidas = 0
+    for l in lista_lideres:
+        if registro_medallas.contiene(l["medalla"]):
+            obtenidas += 1
     print(f"Medallas: {obtenidas}/{len(lista_lideres)}")
     for lider in lista_lideres:
         marca = "(obtenida)" if registro_medallas.contiene(lider["medalla"]) else "(por obtener)"
@@ -173,20 +177,17 @@ def ordenar_pc(pc):
     if pc.cabeza is None:
         print("La PC esta vacia")
         return
-
     copia = []
     actual = pc.cabeza
     while actual is not None:
         copia.append(actual.valor)
         actual = actual.siguiente
- 
     print("--- Ordenar PC ---")
     print("  1. Alfabeticamente")
     print("  2. Por tipo")
     print("  3. Competitiva")
     print("  4. Cancelar")
     opcion = int(input("Elegí una opción: "))
- 
     if opcion == 1:
         n = len(copia)
         for i in range(n - 1):
@@ -227,30 +228,34 @@ def ordenar_pc(pc):
         return
 
 def buscar_en_equipo(equipo):
-    if not equipo:
+    if len(equipo) == 0:
         print("Tu equipo esta vacio")
         return
-    nombre = input("escribi el nombre del Pokémon que queres buscar: ").strip()
-    for pokemon in enumerate(equipo):
-        if pokemon.nombre.lower() == nombre.lower():
-            print(f"{pokemon.nombre} esta en tu equipo")
-            return
-
-    print(f"{nombre} no esta en tu equipo")
+    nombre = input("escribi el nombre del Pokemon que queres buscar: ")
+    encontrado = False
+    for i in range(len(equipo)):
+        if equipo[i].nombre.lower() == nombre.lower():
+            print(f"{equipo[i].nombre} esta en tu equipo en la posicion {i + 1}")
+            encontrado = True
+            break
+    if not encontrado:
+        print(f"{nombre} no esta en tu equipo")
 
 def consultar_pokedex(pokedex):
-    id_ordenados = sorted([
-        int(bucket[0]) for bucket in pokedex.buckets if bucket is not None
-    ])
-
+    id_ordenados = []
+    for bucket in pokedex.buckets:
+        if bucket is not None:
+            id_ordenados.append(int(bucket[0]))
+    id_ordenados.sort()
+ 
     id = int(input("Escribi el id del pokemon que vas a buscar: "))
-
+ 
     izquierda = 0
     derecha = len(id_ordenados) - 1
-
+ 
     while izquierda <= derecha:
         medio = (izquierda + derecha) // 2
-
+ 
         if id_ordenados[medio] == id:
             pokemon = pokedex.buscar(str(id))
             print(f"El id {id} es de: {pokemon}")
@@ -259,5 +264,5 @@ def consultar_pokedex(pokedex):
             izquierda = medio + 1
         else:
             derecha = medio - 1
-
+ 
     print(f"El id {id} no esta en la pokedex")
