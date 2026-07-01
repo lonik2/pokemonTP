@@ -48,12 +48,15 @@ def capturar_pokemon(pokedex, equipo, pc):
     print(f"Un {pokemon.nombre} salvaje ha aparecido")
     time.sleep (1)
     print(f"{pokemon.nombre} atrapado exitosamente")
+    time.sleep(1)
     if len(equipo) < 6:
         equipo.append (pokemon)
-        print (f"{pokemon} agregado al equipo")
+        print (f"{pokemon.nombre} agregado al equipo")
+        time.sleep(1)
     else:
         pc.agregar(pokemon)
-        print(f"{pokemon} guardado en la pc")
+        print(f"{pokemon.nombre} guardado en la pc")
+        time.sleep(1)
     return pokemon
 
 def curar (equipo, centro_pokemon):
@@ -137,12 +140,21 @@ def desafiar_lider(lista_lideres, registro_medallas):
             print(f"Ya tenias la {lider["medalla"]}")
     else:
         print(f"Perdiste contra {lider["lider"]}")
+
+def ver_equipo():
+    if not equipo:
+        print("Tu equipo esta vacio")
+        return
+    print("---Tu equipo---")
+    for i, p in enumerate(equipo, start=1):
+        print(f"  {i}. {p}")
+    time.sleep(2)
  
 def ver_registro(lista_lideres, registro_medallas):
     obtenidas = sum(1 for l in lista_lideres if registro_medallas.contiene(l["medalla"]))
     print(f"Medallas: {obtenidas}/{len(lista_lideres)}")
     for lider in lista_lideres:
-        marca = "[X]" if registro_medallas.contiene(lider["medalla"]) else "[ ]"
+        marca = "(obtenida)" if registro_medallas.contiene(lider["medalla"]) else "(por obtener)"
         print(f"  {marca} {lider["medalla"]} - {lider["lider"]}")
 
 def ver_pc(pc):
@@ -249,9 +261,3 @@ def consultar_pokedex(pokedex):
             derecha = medio - 1
 
     print(f"El id {id} no esta en la pokedex")
-
-print ("-----POKEDEX NACIONAL-----")
-Pokedex.mapa()
-print()
-print ("-----REGISTRO DE MEDALLAS-----")
-Registro_medallas.mostrar_set()
