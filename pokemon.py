@@ -214,6 +214,41 @@ def ordenar_pc(pc):
         print("Opcion invalida")
         return
 
+def buscar_en_equipo(equipo):
+    if not equipo:
+        print("Tu equipo esta vacio")
+        return
+    nombre = input("escribi el nombre del Pokémon que queres buscar: ").strip()
+    for pokemon in enumerate(equipo):
+        if pokemon.nombre.lower() == nombre.lower():
+            print(f"{pokemon.nombre} esta en tu equipo")
+            return
+
+    print(f"{nombre} no esta en tu equipo")
+
+def consultar_pokedex(pokedex):
+    id_ordenados = sorted([
+        int(bucket[0]) for bucket in pokedex.buckets if bucket is not None
+    ])
+
+    id = int(input("Escribi el id del pokemon que vas a buscar: "))
+
+    izquierda = 0
+    derecha = len(id_ordenados) - 1
+
+    while izquierda <= derecha:
+        medio = (izquierda + derecha) // 2
+
+        if id_ordenados[medio] == id:
+            pokemon = pokedex.buscar(str(id))
+            print(f"El id {id} es de: {pokemon}")
+            return
+        elif id_ordenados[medio] < id:
+            izquierda = medio + 1
+        else:
+            derecha = medio - 1
+
+    print(f"El id {id} no esta en la pokedex")
 
 print ("-----POKEDEX NACIONAL-----")
 Pokedex.mapa()
