@@ -1,0 +1,10 @@
+1. Si se agrega al final del equipo principal su complejidad seria de O(1) ya que al ser un array solo se necesita un append qur hace la accion el momento. Si se agrega al inicio de
+   la pc la complejidad tambien seria O(1) ya que la lista enlazada no tendria que recorrer los nodos porque al encajarse en el primero no haria falta hacer esto.
+
+2. Para la pokedex se uso un hashmap ya que a la hora de buscar un elemento sin saber su indice este tiene una complejidad mas baja, siendo O(1), que un lista convencional,
+   en la cual se debe ir elemento por elemento si no te sabes el indice, lo que hace que su complejidad temporal sea de O(n).
+
+3. En el caso del bubble sort seria lento para completar el ordenamiento ya que recoriria un monton de operaciones para ordenar la lista. Su peor caso seria que la lista este
+   totalmente al reves, que es donde mas operaciones requeriria para completar el proceso. En el caso del quick sort seria mas rapido ya que al ir dividiendo en mitades se
+   necesitarian menos operaciones para completar el ordenamiento. Su peor caso seria que agarre como pivote al elemento mas grande o mas pequeño de la lista lo que haria que
+   tardase mucho mas en terminar de ordenar ya que no podria dividir las mitades.
