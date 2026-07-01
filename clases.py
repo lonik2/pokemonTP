@@ -78,9 +78,9 @@ class HashSet:
             print(f"{indice+1}: {bucket}")
 
 class Nodo:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+    def __init__(self, valor):
+        self.valor = valor
+        self.siguiente = None
 
 class ListaEnlazada:
     def __init__(self):

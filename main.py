@@ -1,4 +1,4 @@
-from pokemon import (Pokedex, Registro_medallas, lista_lideres, equipo, pc, centro_pokemon, transferencias, capturar_pokemon, curar, transferir_pokemon, deshacer_transferencia, desafiar_lider, ver_equipo, ver_registro, ver_pc, ordenar_pc, buscar_en_equipo, consultar_pokedex)
+from pokemon import (Pokedex, Registro_medallas, lista_lideres, equipo, pc, centro_pokemon, transferencias, capturar_pokemon, curar, transferir_pokemon, deshacer_transferencia, desafiar_lider, ver_equipo, ver_registro, ver_pc, ordenar_pc, buscar_en_equipo, consultar_pokedex, mover_pokemon)
 
 
 def menu():
@@ -17,9 +17,10 @@ def menu():
         print("10. Buscar Pokemon en equipo")
         print("11. Consultar pokedex")
         print("12. Ver pokedex completa")
-        print("13. Salir")
+        print("13. Mover pokemon")
+        print("14. Salir")
 
-        opcion = input("Elegi una opción: ").strip()
+        opcion = input("Elegi una opción: ")
 
         if opcion == "1":
             capturar_pokemon(Pokedex, equipo, pc)
@@ -40,7 +41,7 @@ def menu():
             ordenar_pc(pc)
 
         elif opcion == "6":
-            transferir_pokemon(pc, transferencias)
+            transferir_pokemon(pc, transferencias,)
 
         elif opcion == "7":
             deshacer_transferencia(pc, transferencias)
@@ -60,8 +61,11 @@ def menu():
         elif opcion == "12":
             print("---Pokedex Nacional---")
             Pokedex.mapa()
-
+        
         elif opcion == "13":
+            mover_pokemon(equipo, pc)
+
+        elif opcion == "14":
             print("Hasta luego")
             break
 

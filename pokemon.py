@@ -89,7 +89,7 @@ def transferir_pokemon (pc, transferencias, pokemon):
     print("--- pokemones en la PC ---")
     for i in range(len(disponibles)):
         print(f"  {i + 1}. {disponibles[i]}")
-    eleccion = int(input("Elegí el número del pokemon que queres transferir: "))
+    eleccion = int(input("Elegi el numero del pokemon que queres transferir: "))
     if eleccion < 1 or eleccion > len(disponibles):
         print("numero invalido")
         return
@@ -109,6 +109,55 @@ def deshacer_transferencia(pc, transferencias):
     pokemon = transferencias.pop()
     pc.agregar(pokemon)
     print(f"{pokemon.nombre} volvio a la PC")
+
+def mover_pokemon(equipo, pc):
+    print("1. equipo a pc")
+    print("2. pc a equipo")
+    print("3. cancelar")
+    opcion = input("Elegi una opción: ")
+ 
+    if opcion == "3":
+        return
+    elif opcion == "1":
+        if len(equipo) == 0:
+            print("Tu equipo esta vacio")
+            return
+        print("Tu equipo")
+        for i in range(len(equipo)):
+            print(f"  {i + 1}. {equipo[i]}")
+        eleccion = int(input("Elegi el numero del pokemon que queres mandar a la PC: "))
+        if eleccion < 1 or eleccion > len(equipo):
+            print("numero invalido")
+            return
+        pokemon = equipo[eleccion - 1]
+        equipo.remove(pokemon)
+        pc.agregar(pokemon)
+        print(f"{pokemon.nombre} fue mandado a la PC")
+    elif opcion == "2":
+        if pc.cabeza is None:
+            print("La PC esta vacia")
+            return
+        if len(equipo) >= 6:
+            print("Tu equipo esta lleno, saca uno primero")
+            return
+        disponibles = []
+        nodo = pc.cabeza
+        while nodo is not None:
+            disponibles.append(nodo.valor)
+            nodo = nodo.siguiente
+        print("Pokemon en la PC")
+        for i in range(len(disponibles)):
+            print(f"  {i + 1}. {disponibles[i]}")
+        eleccion = int(input("Elegi el numero del pokemon que queres traer al equipo: "))
+        if eleccion < 1 or eleccion > len(disponibles):
+            print("numero invalido")
+            return
+        pokemon = disponibles[eleccion - 1]
+        pc.remover(pokemon)
+        equipo.append(pokemon)
+        print(f"{pokemon.nombre} entro a tu equipo")
+    else:
+        print("opcion invalida")
 
 def desafiar_lider(lista_lideres, registro_medallas):
     if len(lista_lideres) == 0:
