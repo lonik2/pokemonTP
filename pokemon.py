@@ -75,7 +75,7 @@ def curar (equipo, centro_pokemon):
         print (f"{p} curado")
         time.sleep(1)
 
-def transferir_pokemon (pc, transferencias, pokemon):
+def transferir_pokemon (pc, transferencias):
     if pc.cabeza is None:
         print("no hay pokemones en la PC")
         return
@@ -100,7 +100,7 @@ def transferir_pokemon (pc, transferencias, pokemon):
         transferencias.stack.pop(0)
     transferencias.push(pokemon)
     print(f"{pokemon.nombre} fue transferido al profesor Oak")
-
+    time.sleep(1.5)
 
 def deshacer_transferencia(pc, transferencias):
     if transferencias.isEmpty():
@@ -109,6 +109,7 @@ def deshacer_transferencia(pc, transferencias):
     pokemon = transferencias.pop()
     pc.agregar(pokemon)
     print(f"{pokemon.nombre} volvio a la PC")
+    time.sleep(1.5)
 
 def mover_pokemon(equipo, pc):
     print("1. equipo a pc")
@@ -116,9 +117,7 @@ def mover_pokemon(equipo, pc):
     print("3. cancelar")
     opcion = input("Elegi una opción: ")
  
-    if opcion == "3":
-        return
-    elif opcion == "1":
+    if opcion == "1":
         if len(equipo) == 0:
             print("Tu equipo esta vacio")
             return
@@ -133,6 +132,7 @@ def mover_pokemon(equipo, pc):
         equipo.remove(pokemon)
         pc.agregar(pokemon)
         print(f"{pokemon.nombre} fue mandado a la PC")
+        time.sleep(1.5)
     elif opcion == "2":
         if pc.cabeza is None:
             print("La PC esta vacia")
@@ -156,6 +156,9 @@ def mover_pokemon(equipo, pc):
         pc.remover(pokemon)
         equipo.append(pokemon)
         print(f"{pokemon.nombre} entro a tu equipo")
+        time.sleep(1.5)
+    elif opcion == "3":
+        return
     else:
         print("opcion invalida")
 
@@ -182,13 +185,17 @@ def desafiar_lider(lista_lideres, registro_medallas):
     gano = random.random() < 0.5
     if gano:
         print(f"Ganaste contra {lider['lider']}")
+        time.sleep(1.5)
         agregada = registro_medallas.agregar(lider["medalla"])
         if agregada:
             print(f"Obtuviste la {lider['medalla']}")
+            time.sleep(1)
         else:
             print(f"Ya tenias la {lider['medalla']}")
+            time.sleep(1)
     else:
         print(f"Perdiste contra {lider['lider']}")
+        time.sleep(1.5)
  
 
 def ver_equipo():
@@ -198,7 +205,7 @@ def ver_equipo():
     print("---Tu equipo---")
     for i, p in enumerate(equipo, start=1):
         print(f"  {i}. {p}")
-    time.sleep(2)
+    time.sleep(2.5)
  
 def ver_registro(lista_lideres, registro_medallas):
     obtenidas = 0
@@ -209,6 +216,7 @@ def ver_registro(lista_lideres, registro_medallas):
     for lider in lista_lideres:
         marca = "(obtenida)" if registro_medallas.contiene(lider["medalla"]) else "(por obtener)"
         print(f"  {marca} {lider["medalla"]} - {lider["lider"]}")
+    time.sleep(2.5)
 
 def ver_pc(pc):
     if pc.cabeza is None:
@@ -221,6 +229,7 @@ def ver_pc(pc):
         print(f"{contador}. {actual.valor}")
         actual = actual.siguiente
         contador += 1
+    time.sleep(2.5)
 
 def ordenar_pc(pc):
     if pc.cabeza is None:
@@ -284,11 +293,13 @@ def buscar_en_equipo(equipo):
     encontrado = False
     for i in range(len(equipo)):
         if equipo[i].nombre.lower() == nombre.lower():
-            print(f"{equipo[i].nombre} esta en tu equipo en la posicion {i + 1}")
+            print(f"{equipo[i].nombre} esta en tu equipo")
+            time.sleep(1.5)
             encontrado = True
             break
     if not encontrado:
         print(f"{nombre} no esta en tu equipo")
+        time.sleep(1.5)
 
 def consultar_pokedex(pokedex):
     id_ordenados = []
@@ -296,15 +307,11 @@ def consultar_pokedex(pokedex):
         if bucket is not None:
             id_ordenados.append(int(bucket[0]))
     id_ordenados.sort()
- 
     id = int(input("Escribi el id del pokemon que vas a buscar: "))
- 
     izquierda = 0
     derecha = len(id_ordenados) - 1
- 
     while izquierda <= derecha:
         medio = (izquierda + derecha) // 2
- 
         if id_ordenados[medio] == id:
             pokemon = pokedex.buscar(str(id))
             print(f"El id {id} es de: {pokemon}")
@@ -313,5 +320,5 @@ def consultar_pokedex(pokedex):
             izquierda = medio + 1
         else:
             derecha = medio - 1
- 
     print(f"El id {id} no esta en la pokedex")
+    time.sleep(1.5)
