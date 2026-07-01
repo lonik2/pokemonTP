@@ -284,6 +284,11 @@ def ordenar_pc(pc):
     else:
         print("Opcion invalida")
         return
+    
+    nodo = pc.cabeza
+    for i in range(len(copia)):
+        nodo.valor = copia[i]
+        nodo = nodo.siguiente
 
 def buscar_en_equipo(equipo):
     if len(equipo) == 0:
